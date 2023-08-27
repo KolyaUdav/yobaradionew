@@ -12,7 +12,7 @@ class PictureServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->singleton('Picture', static fn():PictureService => app(PictureService::class));
+        app()->singleton('picture', static fn():PictureService => app(PictureService::class));
     }
 
 }

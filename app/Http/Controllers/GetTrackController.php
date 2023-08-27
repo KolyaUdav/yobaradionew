@@ -17,7 +17,8 @@ class GetTrackController extends Controller
 
     public function show(): string //BinaryFileResponse
     {
-        //return response()->download($this->musicService->getTrackFile());
-        return implode(" ", $this->musicService->getMusicData());
+        $musicData = $this->musicService->getMusicData();
+
+        return implode(' ', $musicData[0]) . "\n" . implode(' ', $musicData[1]);
     }
 }

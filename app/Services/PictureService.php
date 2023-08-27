@@ -3,12 +3,18 @@
 
 namespace App\Services;
 
+use App\Abstract\FileAbstract;
 
-class PictureService
+class PictureService extends FileAbstract
 {
 
-    public function getPictureUrl(int $id): string
+    public function getPictureNames(): array
     {
-        return 'https://picture.org/';
+        return parent::getFileNames('pictures');
+    }
+
+    public function getUrl(int $id): string // TODO: ЗАГЛУШКА
+    {
+        return 'pic';
     }
 }

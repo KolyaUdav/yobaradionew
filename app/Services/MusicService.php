@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Services;
 
-use JetBrains\PhpStorm\Pure;
+namespace App\Services;
 
 class MusicService
 {
@@ -11,12 +10,12 @@ class MusicService
     {
     }
 
-    #[Pure] public function getMusicData(): array
+    public function getMusicData(): array
     {
         $musicData = [];
 
-        $musicData['soundUrl'] = $this->soundService->getSoundUrl(0);
-        $musicData['pictureUrl'] = $this->pictureService->getPictureUrl(0);
+        $musicData[] = $this->soundService->getSoundNames();
+        $musicData[] = $this->pictureService->getPictureNames();
 
         return $musicData;
     }

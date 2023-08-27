@@ -3,12 +3,18 @@
 
 namespace App\Services;
 
+use App\Abstract\FileAbstract;
 
-class SoundService
+class SoundService extends FileAbstract
 {
 
-    public function getSoundUrl(int $id): string
+    public function getSoundNames(): array
     {
-        return 'https://music.org/';
+        return parent::getFileNames('sounds');
+    }
+
+    public function getUrl(int $id): string // TODO: ЗАГЛУШКА
+    {
+        return 'sound';
     }
 }

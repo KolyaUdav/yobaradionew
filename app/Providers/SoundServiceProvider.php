@@ -12,6 +12,6 @@ class SoundServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->singleton('Sound', static fn():SoundService => app(SoundService::class));
+        app()->singleton('sound', static fn():SoundService => app(SoundService::class));
     }
 }

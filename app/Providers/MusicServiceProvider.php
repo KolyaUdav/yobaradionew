@@ -10,6 +10,6 @@ class MusicServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        app()->singleton('Music', static fn():MusicService => app(MusicService::class));
+        app()->singleton('music', static fn():MusicService => app(MusicService::class));
     }
 }
