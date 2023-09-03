@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\MusicService;
+use App\Services\ServiceMusic;
 use Illuminate\Http\Response;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class GetTrackController extends Controller
 {
 
-    public function __construct(private MusicService $musicService)
+    public function __construct(private ServiceMusic $musicService)
     {
     }
 

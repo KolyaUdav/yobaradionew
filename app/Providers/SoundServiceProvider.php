@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\SoundService;
+use App\Services\ServiceSound;
 use Illuminate\Support\ServiceProvider;
 
 class SoundServiceProvider extends ServiceProvider
@@ -12,6 +12,6 @@ class SoundServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->singleton('sound', static fn():SoundService => app(SoundService::class));
+        app()->singleton('sound', static fn():ServiceSound => app(ServiceSound::class));
     }
 }

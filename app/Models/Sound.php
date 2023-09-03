@@ -9,5 +9,7 @@ class Sound extends Model
 {
     use HasFactory;
 
-    protected $table = 'sounds';
+    public $timestamps = false;
+
+    protected $fillable = ['name', 'url'];
 }

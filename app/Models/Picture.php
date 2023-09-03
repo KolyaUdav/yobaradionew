@@ -10,5 +10,7 @@ class Picture extends Model
 {
     use HasFactory;
 
-    protected $table = 'pictures';
+    public $timestamps = false;
+
+    protected $fillable = ['name', 'url'];
 }

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\PictureService;
+use App\Services\ServicePicture;
 use Illuminate\Support\ServiceProvider;
 
 class PictureServiceProvider extends ServiceProvider
@@ -12,7 +12,7 @@ class PictureServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->singleton('picture', static fn():PictureService => app(PictureService::class));
+        app()->singleton('picture', static fn():ServicePicture => app(ServicePicture::class));
     }
 
 }
