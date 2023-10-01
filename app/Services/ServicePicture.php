@@ -11,12 +11,7 @@ class ServicePicture extends AbstractFile
 
     public function getPictureNames(): array
     {
-        return parent::getFileNames('pictures');
-    }
-
-    public function getUrl(int $id): string // TODO: ЗАГЛУШКА
-    {
-        return 'pic';
+        return parent::getFileNames(config('dirs.pic'), 'jpg');
     }
 
     public function save(array $fileNames): void
@@ -26,5 +21,20 @@ class ServicePicture extends AbstractFile
                 'url' => parent::nameToUrl($name, config('dirs.pic')),
             ]);
         }
+    }
+
+    public function deleteSavedPic(): void
+    {
+        parent::deleteSaved(new Picture);
+    }
+
+    public function getSavedPicNames(): array
+    {
+        return parent::getSavedNames(new Picture);
+    }
+
+    public function getSavedPicCount(): int
+    {
+        return parent::getSavedCount(new Picture);
     }
 }

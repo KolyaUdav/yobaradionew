@@ -11,7 +11,7 @@ class ServiceSound extends AbstractFile
 
     public function getSoundNames(): array
     {
-        return parent::getFileNames('sounds');
+        return parent::getFileNames(config('dirs.sound'), 'mp3');
     }
 
     public function save(array $fileNames): void
@@ -24,8 +24,18 @@ class ServiceSound extends AbstractFile
         }
     }
 
-    public function getUrl(int $id): string // TODO: ЗАГЛУШКА
+    public function deleteSavedSound(): void
     {
-        return 'sound';
+        parent::deleteSaved(new Sound);
+    }
+
+    public function getSavedSoundNames(): array
+    {
+        return parent::getSavedNames(new Sound);
+    }
+
+    public function getSavedSoundCount(): int
+    {
+        return parent::getSavedCount(new Sound);
     }
 }

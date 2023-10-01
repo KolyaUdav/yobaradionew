@@ -17,12 +17,24 @@ class ServiceMusic
         $soundNames = $this->serviceSound->getSoundNames();
         $pictureNames = $this->servicePicture->getPictureNames();
 
-        $this->servicePicture->save($pictureNames);
-        $this->serviceSound->save($soundNames);
+        $savedSoundCount = $this->serviceSound->getSavedSoundCount();
+
+        if (sizeof($soundNames) !== $savedSoundCount) {
+            $this->updateMusicData($soundNames, $pictureNames);
+        }
 
         $musicData[] = $soundNames;
         $musicData[] = $pictureNames;
 
         return $musicData;
+    }
+
+    private function updateMusicData(array $soundNames, array $picNames): void
+    {
+            $this->serviceSound->deleteSavedSound();
+            $this->servicePicture->deleteSavedPic();
+
+            $this->serviceSound->save($soundNames);
+            $this->servicePicture->save($picNames);
     }
 }

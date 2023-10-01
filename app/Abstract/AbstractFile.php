@@ -3,20 +3,24 @@
 
 namespace App\Abstract;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 
 abstract class AbstractFile
 {
 
-    protected function getFileNames(string $folder): array
+    protected function getFileNames(string $folder, string|array $allowedExt = ''): array
     {
         $fileNames = [];
 
         $files = Storage::disk('local')->files($folder);
 
         foreach ($files as $file) {
-            $fileNames[] = basename($file);
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+
+            if ($this->isMatchExt($ext, $allowedExt)) {
+                $fileNames[] = basename($file);
+            }
         }
 
         return $fileNames;
@@ -24,10 +28,42 @@ abstract class AbstractFile
 
     protected function nameToUrl(string $name, string $folder): string
     {
-        return URL::to('/') . '/' . $folder . '/' . str_replace(' ', '_', $name);
+        return asset($folder . '/' . $name);
     }
 
-    public abstract function getUrl(int $id): string;
+    protected function getSavedNames(Model $model): array
+    {
+        return $model::all()->toArray();
+    }
+
+    protected function getSavedCount(Model $model): int
+    {
+        return $model::count();
+    }
+
+    protected function deleteSaved(Model $model): void
+    {
+        $model::truncate();
+    }
+
+    private function isMatchExt(string $ext, string|array $allowedExt): bool
+    {
+        $isMatch = true;
+
+        if (is_array($allowedExt) && !empty($allowedExt)) {
+            foreach ($allowedExt as $value) {
+                $isMatch = $ext == $value;
+
+                if ($isMatch) {
+                    break;
+                }
+            }
+        } else {
+            $isMatch = !empty($allowedExt) && $ext == $allowedExt;
+        }
+
+        return $isMatch;
+    }
 
     public abstract function save(array $fileNames): void;
 }
