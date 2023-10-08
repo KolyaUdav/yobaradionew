@@ -3,11 +3,28 @@
 
 namespace App\Services;
 
+use App\Models\Sound;
+
 class ServiceMusic
 {
 
-    public function __construct(private ServiceSound $serviceSound, private ServicePicture $servicePicture)
+    public function __construct(
+        private ServiceSound $serviceSound,
+        private ServicePicture $servicePicture,
+        private ServiceCacheSound $serviceCache,
+    )
+    {}
+
+    public function getTrack(): string
     {
+        $trackData = $this->serviceCache->getSoundNonCached($this->serviceSound->getSavedData(new Sound));
+        $trackUrl = '';
+
+        if (!empty($trackData)) {
+            $trackUrl = $trackData['url'];
+        }
+
+        return $trackUrl;
     }
 
     public function getMusicData(): array

@@ -9,7 +9,9 @@
 </head>
 <body>
     <div id="app">
-
+        <audio controls autoplay>
+            <source src="{{ $url }}" type="audio/mpeg">
+        </audio>
     </div>
 </body>
 </html>

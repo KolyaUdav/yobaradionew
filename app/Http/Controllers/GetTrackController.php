@@ -15,10 +15,8 @@ class GetTrackController extends Controller
     {
     }
 
-    public function show(): string //BinaryFileResponse
+    public function index(): \Illuminate\Contracts\View\View
     {
-        $musicData = $this->musicService->getMusicData();
-
-        return implode(' ', $musicData[0]) . "\n" . implode(' ', $musicData[1]);
+        return view('welcome', ['url' => $this->musicService->getTrack()]);
     }
 }

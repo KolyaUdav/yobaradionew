@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 abstract class AbstractFile
 {
 
+    public function getSavedData(Model $model, array|string $columns = []): array
+    {
+        if (empty($columns)) {
+            return $model::all()->toArray();
+        } else {
+            return $model::all($columns)->toArray();
+        }
+    }
+
     protected function getFileNames(string $folder, string|array $allowedExt = ''): array
     {
         $fileNames = [];
@@ -33,7 +42,14 @@ abstract class AbstractFile
 
     protected function getSavedNames(Model $model): array
     {
-        return $model::all()->toArray();
+        $names = [];
+        $results = $this->getSavedData($model, 'name');
+
+        foreach ($results as $result) {
+            $names[] = $result['name'];
+        }
+
+        return $names;
     }
 
     protected function getSavedCount(Model $model): int
