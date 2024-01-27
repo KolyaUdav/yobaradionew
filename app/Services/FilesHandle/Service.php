@@ -1,12 +1,13 @@
 <?php
 
 
-namespace App\Abstract;
+namespace App\Services\FilesHandle;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-abstract class AbstractFile
+class Service
 {
 
     public function getSavedData(Model $model, array|string $columns = []): array
@@ -80,6 +81,4 @@ abstract class AbstractFile
 
         return $isMatch;
     }
-
-    public abstract function save(array $fileNames): void;
 }

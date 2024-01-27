@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GetTrackController;
+use App\Http\Controllers\TracksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Введите в url /get-track или /update-data';
 });
 
-Route::get('/get-track', [GetTrackController::class, 'index']);
+Route::get('/get-track', [TracksController::class, 'getTrack']);
+Route::get('/update-data', [TracksController::class, 'updateData']);

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\FilesHandle;
 
-use App\Abstract\AbstractFile;
+
 use App\Models\Sound;
 
-class ServiceSound extends AbstractFile
+class SoundService extends Service implements IService
 {
 
     public function getSoundNames(): array
@@ -14,14 +14,14 @@ class ServiceSound extends AbstractFile
         return parent::getFileNames(config('dirs.sound'), 'mp3');
     }
 
-    public function save(array $fileNames): void
+    public function save(string $name): Sound
     {
-        foreach ($fileNames as $name) {
-            Sound::create([
-                'name' => $name,
-                'url' => parent::nameToUrl($name, config('dirs.sound')),
-            ]);
-        }
+        $sound = new Sound;
+        $sound->name = $name;
+        $sound->url = parent::nameToUrl($name, config('dirs.sound'));
+        $sound->save();
+
+        return $sound;
     }
 
     public function deleteSavedSound(): void

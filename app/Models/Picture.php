@@ -13,4 +13,11 @@ class Picture extends Model
     public $timestamps = false;
 
     protected $fillable = ['name', 'url'];
+
+    protected $table = 'pictures';
+
+    public function sound(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Sound::class);
+    }
 }

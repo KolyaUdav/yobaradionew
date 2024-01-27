@@ -7,7 +7,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Cache;
 use JetBrains\PhpStorm\ArrayShape;
 
-class ServiceCacheSound
+class CacheSoundService
 {
 
     private const CACHE_STORE_TTL = 7200;

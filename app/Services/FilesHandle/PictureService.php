@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\FilesHandle;
 
-use App\Abstract\AbstractFile;
+
 use App\Models\Picture;
 
-class ServicePicture extends AbstractFile
+class PictureService extends Service implements IService
 {
 
     public function getPictureNames(): array
@@ -14,13 +14,13 @@ class ServicePicture extends AbstractFile
         return parent::getFileNames(config('dirs.pic'), 'jpg');
     }
 
-    public function save(array $fileNames): void
+    public function save(string $name): Picture
     {
-        foreach ($fileNames as $name) {
-            Picture::create([
-                'url' => parent::nameToUrl($name, config('dirs.pic')),
-            ]);
-        }
+        $picture = new Picture;
+        $picture->url = parent::nameToUrl($name, config('dirs.pic'));
+        $picture->save();
+
+        return $picture;
     }
 
     public function deleteSavedPic(): void
